@@ -128,7 +128,7 @@ export default function Progress() {
   ];
 
   return (
-    <div className="p-8 pt-24" style={{ color: 'var(--color-text-primary)' }}>
+    <div className="pt-16 pb-8 px-8" style={{ color: 'var(--color-text-primary)' }}>
       {/* Header */}
       <header className="mb-10">
         <h1 className="text-4xl font-extrabold mb-2 flex items-center gap-3" style={{ 

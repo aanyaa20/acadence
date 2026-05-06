@@ -303,7 +303,7 @@ export default function Courses() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-6" style={{ backgroundColor: 'var(--color-bg-primary)', color: 'var(--color-text-primary)' }}>
+    <div className="min-h-screen pt-16 pb-12 px-6" style={{ backgroundColor: 'var(--color-bg-primary)', color: 'var(--color-text-primary)' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header with Generate Button */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
@@ -315,11 +315,13 @@ export default function Courses() {
           </div>
           <button
             onClick={() => setIsDialogOpen(true)}
-            className="mt-4 md:mt-0 px-6 py-3 rounded-lg font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            className="mt-4 md:mt-0 px-6 py-3 rounded-lg font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200"
             style={{
               background: 'var(--gradient-primary)',
               color: 'var(--color-text-inverse)'
             }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
             <FaRobot className="text-xl" />
             Generate AI Course
@@ -330,7 +332,7 @@ export default function Courses() {
           {allCourses.map((course) => (
             <div
               key={course.id}
-              className="rounded-xl overflow-hidden shadow-lg hover:scale-105 transform transition flex flex-col h-full border"
+              className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transform transition hover:scale-105 flex flex-col h-full border"
               style={{
                 backgroundColor: 'var(--color-bg-elevated)',
                 borderColor: 'var(--color-border-light)'
@@ -369,11 +371,13 @@ export default function Courses() {
                   href={course.link ? course.link : "#"}
                   target={course.link ? "_blank" : "_self"}
                   rel="noopener noreferrer"
-                  className="w-full mt-auto py-2 rounded-lg font-semibold text-center block transition"
+                  className="w-full mt-auto py-2.5 rounded-lg font-semibold text-center block transition-all duration-200"
                   style={{
                     backgroundColor: 'var(--color-primary)',
                     color: 'var(--color-text-inverse)'
                   }}
+                  onMouseEnter={(e) => e.target.style.opacity = '0.9'}
+                  onMouseLeave={(e) => e.target.style.opacity = '1'}
                 >
                   Enroll Now
                 </a>

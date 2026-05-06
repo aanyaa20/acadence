@@ -58,7 +58,7 @@ export default function Courses() {
   if (loading) {
     return (
       <div
-        className="pt-24 p-8 flex items-center justify-center min-h-screen"
+        className="flex items-center justify-center min-h-screen"
         style={{ color: "var(--color-text-primary)" }}
       >
         <div className="text-center">
@@ -75,7 +75,7 @@ export default function Courses() {
   }
 
   return (
-    <div className="pt-24 p-8" style={{ color: "var(--color-text-primary)" }}>
+    <div className="pt-16 pb-8 px-8" style={{ color: "var(--color-text-primary)" }}>
       {/* Header */}
       <header className="mb-10">
         <div className="flex items-center gap-3 mb-2">

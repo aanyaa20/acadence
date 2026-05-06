@@ -413,18 +413,13 @@ export default function Dashboard() {
   return (
     <div className="p-6 pt-16 relative bg-secondary min-h-screen">
       {/* Welcome Section */}
-      <header className="mb-6 flex justify-between items-start">
+      <header className="mb-8 flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold mb-2" style={{
-            background: 'var(--gradient-primary)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
+          <h1 className="text-4xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
             Welcome Back, {user?.name || "Student"}
           </h1>
-          <p className="text-secondary text-lg">
-            Track your progress, explore recommendations, and continue learning
+          <p className="text-base" style={{ color: 'var(--color-text-secondary)' }}>
+            Continue your learning journey and track your progress
           </p>
         </div>
         <button
@@ -435,11 +430,14 @@ export default function Dashboard() {
               refreshUser();
             }
           }}
-          className="flex items-center gap-2 px-4 py-2 text-inverse rounded-lg transition-all shadow-custom-sm hover:shadow-custom-md"
-          style={{ backgroundColor: 'var(--color-primary)' }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-primary-hover)'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--color-primary)'}
-          title="Refresh stats and streaks"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all font-medium"
+          style={{ 
+            backgroundColor: 'var(--color-primary)',
+            color: 'var(--color-text-inverse)'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+          title="Refresh stats"
         >
           <FaSyncAlt className={loading ? "animate-spin" : ""} />
           Refresh
@@ -448,18 +446,24 @@ export default function Dashboard() {
 
       {/* Stats Section */}
       <section className="grid grid-cols-2 gap-5 mb-8">
-        <StatCard 
-          title="Learning Points" 
-          value={loading ? "..." : (user?.totalPoints || stats.points || 0)} 
-          icon={<FaStar className="text-2xl" style={{ color: 'var(--color-warning)' }} />} 
-        />
-        <div className="rounded-xl p-5 shadow-custom-lg bg-elevated border border-light hover:shadow-custom-xl transition-all duration-300">
+        <div className="rounded-lg p-5 shadow-md bg-elevated border border-light">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>Lessons Learned</h3>
-            <FaBookOpen className="text-xl" style={{ color: 'var(--color-success)' }} />
+            <h3 className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>Learning Points</h3>
+            <FaStar className="text-lg" style={{ color: 'var(--color-warning)' }} />
+          </div>
+          <div className="text-3xl font-bold" style={{ color: 'var(--color-warning)' }}>
+            {loading ? "..." : (user?.totalPoints || stats.points || 0)}
+          </div>
+          <p className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)' }}>Total earned</p>
+        </div>
+
+        <div className="rounded-lg p-5 shadow-md bg-elevated border border-light">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>Lessons Completed</h3>
+            <FaBookOpen className="text-lg" style={{ color: 'var(--color-success)' }} />
           </div>
           <div className="flex items-center gap-4">
-            <div style={{ width: 80, height: 80 }}>
+            <div style={{ width: 60, height: 60 }}>
               <CircularProgressbar
                 value={animatedProgress}
                 text={`${Math.round(animatedProgress)}%`}
@@ -467,18 +471,164 @@ export default function Dashboard() {
                   textColor: 'var(--color-text-primary)',
                   pathColor: 'var(--color-success)',
                   trailColor: 'var(--color-bg-tertiary)',
-                  textSize: '20px',
-                  pathTransitionDuration: 0.5,
-                  pathTransition: 'stroke-dashoffset 0.5s ease-in-out'
+                  textSize: '16px',
+                  pathTransitionDuration: 0.5
                 })}
               />
             </div>
             <div>
-              <div className="text-3xl font-bold" style={{ color: 'var(--color-success)' }}>
+              <div className="text-2xl font-bold" style={{ color: 'var(--color-success)' }}>
                 {loading ? "..." : stats.completed}
               </div>
-              <div className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>Completed</div>
+              <p className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>lessons done</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Premium Features Section */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* Card 1: Resume Analyzer */}
+        <div className="group relative overflow-hidden rounded-xl shadow-md bg-elevated border border-light hover:shadow-lg transition-all duration-200">
+          <div className="relative p-6 h-full flex flex-col">
+            {/* Top Icon - Minimal */}
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors" 
+              style={{ background: 'var(--color-bg-tertiary)' }}>
+              <svg className="w-6 h-6" style={{ color: 'var(--color-primary)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            
+            {/* Title & Subtitle */}
+            <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+              Resume Lab
+            </h3>
+            <p className="text-sm mb-4 flex-1" style={{ color: 'var(--color-text-secondary)' }}>
+              Build and analyze your resume with AI-powered feedback to stand out in interviews.
+            </p>
+            
+            {/* Features List - Minimal */}
+            <div className="space-y-1.5 mb-5">
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-primary)' }}></span>
+                AI Resume Analysis
+              </div>
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-primary)' }}></span>
+                Interview Preparation
+              </div>
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-primary)' }}></span>
+                Real-time Feedback
+              </div>
+            </div>
+
+            {/* CTA Button - Minimal */}
+            <button 
+              onClick={() => window.open('https://resumeanalyzergit-vlkyxcbk6tkehnc5yf5bcd.streamlit.app/', '_blank')}
+              className="w-full py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-200 text-white"
+              style={{ background: 'var(--color-primary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-primary-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'var(--color-primary)'}
+            >
+              Launch Lab
+            </button>
+          </div>
+        </div>
+
+        {/* Card 2: Collaborative Coding */}
+        <div className="group relative overflow-hidden rounded-xl shadow-md bg-elevated border border-light hover:shadow-lg transition-all duration-200">
+          <div className="relative p-6 h-full flex flex-col">
+            {/* Top Icon - Minimal */}
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors" 
+              style={{ background: 'var(--color-bg-tertiary)' }}>
+              <svg className="w-6 h-6" style={{ color: 'var(--color-secondary)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              </svg>
+            </div>
+            
+            {/* Title & Subtitle */}
+            <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+              CODEVANTA
+            </h3>
+            <p className="text-sm mb-4 flex-1" style={{ color: 'var(--color-text-secondary)' }}>
+              Code together with peers in real-time. Solve problems collaboratively and learn faster.
+            </p>
+            
+            {/* Features List - Minimal */}
+            <div className="space-y-1.5 mb-5">
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-secondary)' }}></span>
+                Live Coding Sessions
+              </div>
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-secondary)' }}></span>
+                Real-time Collaboration
+              </div>
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-secondary)' }}></span>
+                Peer Learning Network
+              </div>
+            </div>
+
+            {/* CTA Button - Minimal */}
+            <button 
+              onClick={() => window.open('https://codevanta-orcin.vercel.app', '_blank')}
+              className="w-full py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-200 text-white"
+              style={{ background: 'var(--color-secondary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-secondary-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'var(--color-secondary)'}
+            >
+              Join Sessions
+            </button>
+          </div>
+        </div>
+
+        {/* Card 3: AI Mock Interview */}
+        <div className="group relative overflow-hidden rounded-xl shadow-md bg-elevated border border-light hover:shadow-lg transition-all duration-200">
+          <div className="relative p-6 h-full flex flex-col">
+            {/* Top Icon - Minimal */}
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors" 
+              style={{ background: 'var(--color-bg-tertiary)' }}>
+              <svg className="w-6 h-6" style={{ color: 'var(--color-success)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h-2m0 0H10m2 0v2m0-2v-2m7 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            
+            {/* Title & Subtitle */}
+            <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+              Mock Interview
+            </h3>
+            <p className="text-sm mb-4 flex-1" style={{ color: 'var(--color-text-secondary)' }}>
+              Practice interviews with AI and get personalized feedback to build confidence and improve.
+            </p>
+            
+            {/* Features List - Minimal */}
+            <div className="space-y-1.5 mb-5">
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-success)' }}></span>
+                AI-Powered Practice
+              </div>
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-success)' }}></span>
+                Personalized Feedback
+              </div>
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: 'var(--color-success)' }}></span>
+                Performance Tracking
+              </div>
+            </div>
+
+            {/* CTA Button - Minimal */}
+            <button 
+              onClick={() => window.open('https://mockinterviewerai.netlify.app/', '_blank')}
+              className="w-full py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-200 text-white"
+              style={{ background: 'var(--color-success)' }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.85)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'var(--color-success)'}
+            >
+              Start Practicing
+            </button>
           </div>
         </div>
       </section>

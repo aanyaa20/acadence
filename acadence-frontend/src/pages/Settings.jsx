@@ -144,7 +144,7 @@ export default function Settings() {
 
   return (
     <div
-      className="pt-20 py-8 px-6 min-h-screen"
+      className="pt-16 py-8 px-6 min-h-screen"
       style={{ backgroundColor: "var(--color-bg-secondary)" }}
     >
       <div className="max-w-4xl mx-auto">

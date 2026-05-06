@@ -154,7 +154,7 @@ export default function DashboardLayout() {
 
       {/* Main content */}
       <main className={`flex-1 transition-all duration-300 ${open ? 'ml-64' : 'ml-0 lg:ml-20'}`} style={{ backgroundColor: 'var(--color-bg-secondary)' }}>
-        <div className="p-8 pt-24">
+        <div className="p-8 pt-6">
           <Outlet />
         </div>
       </main>

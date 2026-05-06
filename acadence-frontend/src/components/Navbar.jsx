@@ -61,13 +61,13 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="px-6 py-4 flex justify-between items-center shadow-custom-md fixed top-0 left-0 w-full z-50 border-b" style={{
+    <nav className="px-5 py-2.5 flex justify-between items-center shadow-custom-md fixed top-0 left-0 w-full z-50 border-b" style={{
       backgroundColor: 'var(--color-bg-primary)',
       borderColor: 'var(--color-border-light)'
     }}>
       {/* Left: Logo + Brand */}
-      <div className="flex items-center gap-3 text-2xl font-bold">
-        <img src={logo} alt="Acadence Logo" className="w-10 h-10 rounded-full shadow-custom-sm" />
+      <div className="flex items-center gap-2 text-xl font-bold">
+        <img src={logo} alt="Acadence Logo" className="w-8 h-8 rounded-full shadow-custom-sm" />
         <Link to="/" className="transition-colors" style={{
           background: 'var(--gradient-primary)',
           WebkitBackgroundClip: 'text',
@@ -156,7 +156,7 @@ export default function Navbar() {
           <div className="relative">
             <button
               onClick={() => setOpen(!open)}
-              className="flex items-center space-x-2 px-3 py-2 rounded-lg transition border"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition border"
               style={{
                 backgroundColor: 'var(--color-bg-tertiary)',
                 borderColor: 'var(--color-border-light)'
@@ -172,17 +172,17 @@ export default function Navbar() {
                   )}&background=2563EB&color=fff&bold=true&size=64`
                 }
                 alt="Profile"
-                className="w-8 h-8 rounded-full shadow-custom-sm object-cover border-2"
+                className="w-7 h-7 rounded-full shadow-custom-sm object-cover border-2"
                 style={{ borderColor: 'var(--color-primary)' }}
               />
               <div className="flex flex-col items-start text-left">
-                <span className="font-medium text-sm" style={{ color: 'var(--color-text-primary)' }}>{user?.name || "User"}</span>
-                <span className="text-xs flex items-center gap-1" style={{ color: 'var(--color-success)' }}>
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--color-success)' }}></span>
+                <span className="font-medium text-xs" style={{ color: 'var(--color-text-primary)', lineHeight: '1.2' }}>{user?.name || "User"}</span>
+                <span className="text-xs flex items-center gap-1" style={{ color: 'var(--color-success)', lineHeight: '1' }}>
+                  <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--color-success)' }}></span>
                   Online
                 </span>
               </div>
-              {open ? <FaChevronUp style={{ color: 'var(--color-text-tertiary)' }} /> : <FaChevronDown style={{ color: 'var(--color-text-tertiary)' }} />}
+              {open ? <FaChevronUp className="text-xs" style={{ color: 'var(--color-text-tertiary)' }} /> : <FaChevronDown className="text-xs" style={{ color: 'var(--color-text-tertiary)' }} />}
             </button>
 
             {open && (
